@@ -13,16 +13,16 @@ make
 
 Or, if `make` doesn't work on your machine, try this:
 ```
-npm i --no-progress && elm package install && gulp
+npm i --no-progress && elm package install && npm run start
 ```
 ... which is just the makefile script.
 
 ## Tooling:
-- gulp for building (does webpack make sense here?)
+- webpack for building
 - elm 0.16
-- node-sass for css
+- sass for css
 - postcss for busywork and minification.
-- browserSync for serving and live-reloading (Is there a way to hot-reload outside of reactor?)
+- webpack-dev-server for serving and live-reloading
 
 
 ## Roadmap:

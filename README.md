@@ -1,8 +1,5 @@
-# Elm-kit
-A starter kit for static, elm web-applications. Very much a work in progress.
-
-Assumes elm 0.16 has been installed, and can be found on your path.
-If you haven't done that, (then go do that)[http://elm-lang.org/install].
+# Encounter
+An experiment to create an encounter management system for pathfinder.
 
 ## Usage
 Want to install, serve, compile sass, or elm?

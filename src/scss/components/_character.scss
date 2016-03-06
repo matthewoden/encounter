@@ -1,0 +1,131 @@
+//config
+$character-background-color : #FCFCFC;
+$character-border-color : #dddddd;
+$character-input-focus-border-color: #CDCDCD;
+$character-shadow-color : #dddddd;
+$character-active-background-color: rgba(0, 188, 212, 1);
+$character-active-background-color-hover: rgba(0, 188, 212, 0.75);
+
+// BASE
+.character {
+  border: 1px solid $character-border-color;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: -1px;
+  position: relative;
+  background-color: $character-background-color;
+  transition: all 0.2s ease;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &:hover {
+    position: relative;
+    z-index: 98;
+    box-shadow: 0 2px 15px $character-shadow-color;
+    cursor: pointer;
+    background-color:white;
+  }
+}
+
+// ELEMENTS
+
+.character__initiative {
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid $character-border-color;
+  margin-right: 10px;
+
+  &:hover {
+    border-color: #ddd;
+  }
+  &:focus {
+    border: 1px solid $character-input-focus-border-color;
+    background-color: white;
+  }
+}
+
+.character__name {
+  width: 100%;
+  border: 1px solid transparent;
+  display: block;
+  background-color: transparent;
+  transition: background-color .2s ease, border .2s ease;
+  height: 30px;
+  align-self: center;
+  &:focus {
+    border-bottom: 1px solid $character-input-focus-border-color;
+  }
+}
+
+.character__initiative,
+.character__name,
+.character__remove,
+.character__activate  {
+  &:focus {
+    outline: 0;
+  }
+}
+
+
+.character__remove,
+.character__activate  {
+  transition: opacity .2s ease;
+  opacity: 0;
+  background: transparent;
+  border: none;
+  margin-left: auto;
+  align-self: center;
+
+  .character:hover & {
+    opacity: .5;
+  }
+
+  .character:hover &:hover {
+    opacity: 1;
+  }
+}
+
+
+
+// Modifiers
+
+.character--active {
+  background-color: $character-active-background-color-hover;
+
+  //activate and remove buttons
+  .character__activate,
+  &:hover .character__activate {
+    color: white;
+    opacity: 1;
+  }
+
+  &:hover .character__remove, {
+    opacity: .75;
+  }
+
+
+  //change character name, and placeholder color.
+  .character__name {
+    color: white;
+
+    &::placeholder {
+      color: white;
+      opacity: 1;
+    }
+  }
+
+  &:hover {
+    background-color: rgba(0, 188, 212, 0.75);
+
+    &::placeholder {
+      color: white;
+      opacity: 1;
+    }
+  }
+}

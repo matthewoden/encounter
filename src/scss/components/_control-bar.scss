@@ -1,0 +1,54 @@
+.control-bar {
+  border: 1px solid #ddd;
+  width: 600px;
+  margin: auto;
+  background-color: white;
+  margin-bottom: -1px;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  color: #B2B2B2;
+  padding: 15px;
+}
+
+.control-bar__button {
+  border: 0;
+  background-color: rgba(0, 188, 212, 1);
+  padding: 0 10px;
+  border-radius: 50%;
+  align-items: center;
+  height: 45px;
+  color: white;
+  display: flex;
+  width: 45px;
+  flex-direction: row;
+  justify-content:center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px #ddd;
+
+  &:hover {
+    box-shadow: 0 5px 15px #ddd;
+    cursor: pointer;
+    transform: translate(0, -2px);
+    background-color: rgba(0, 188, 212, 0.75);
+  }
+
+  &:focus,
+  &:active {
+    outline: 0;
+  }
+}
+
+.control-bar__status{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.control-bar__label{
+  color: #646464;
+  font-size: .75em;
+  font-weight: bold;
+  padding-bottom: 10px;
+}

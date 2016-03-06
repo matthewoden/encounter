@@ -1,0 +1,23 @@
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: white;
+  path {
+    fill: white;
+  }
+
+}
+
+// .icon--text-left{
+//   margin-left: 10px;
+// }
+//
+// .icon--text-right{
+//   margin-right: 10px;
+// }
+
+.icon--dark {
+  path {
+    fill: #727272;
+  }
+}

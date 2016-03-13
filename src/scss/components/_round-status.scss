@@ -1,0 +1,26 @@
+//config
+
+$text-color: #4A4A4A;
+
+.round-status {
+  display: flex;
+  flex-direction: row;
+}
+
+.round-status__item {
+ margin-left: 20px;
+ display: flex;
+ flex-direction: column;
+ text-align: center;
+}
+
+.round-status__label {
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.round-status__value {
+  color: $text-color;
+  font-weight: bold;
+  font-size: 24px;
+}

@@ -1,5 +1,12 @@
+//global
 @import "container";
-@import "character";
-@import "character-list";
-@import "control-bar";
 @import "icon";
+
+//sidebar
+@import "sidebar";
+@import "character";
+
+//top header
+@import "menubar";
+@import "round-controls";
+@import "round-status";

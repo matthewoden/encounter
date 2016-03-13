@@ -62,7 +62,6 @@ if ( TARGET_ENV === 'dev' ) {
       inline:             true,
       progress:           true
     },
-
     module: {
       loaders: [
         {
@@ -73,7 +72,15 @@ if ( TARGET_ENV === 'dev' ) {
             'postcss-loader',
             'sass-loader'
           ]
-        }
+        },
+        {
+         test: /\.jsx?$/,
+         exclude: /(node_modules)/,
+         loader: 'babel', // 'babel-loader' is also a legal name to reference
+         query: {
+           presets: ['es2015']
+         }
+       }
       ]
     }
 

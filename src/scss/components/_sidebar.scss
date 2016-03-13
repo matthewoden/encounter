@@ -1,0 +1,14 @@
+$background-color: #4A4A4A;
+.sidebar {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 65px;
+  background-color: white;
+  height: 100%;
+}
+
+.sidebar__list {
+  display: flex;
+  flex-direction: column;
+}

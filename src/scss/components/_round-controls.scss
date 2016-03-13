@@ -1,0 +1,67 @@
+.round-controls {
+  width: 400px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: center;
+  padding: 0 10px;
+  background-color: #222;
+  height: 100%;
+}
+
+.round-controls__button {
+  border: 0;
+  background-color: transparent;
+  padding: 0 10px;
+  align-items: center;
+  height: 45px;
+  color: white;
+  display: flex;
+  width: 45px;
+  position: relative;
+  flex-direction: row;
+  justify-content:center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  // I hate this. TODO: FIX THIS SHIT.
+  // Make the icons part of the component, or something.
+  // They won't be used elsewhere.
+  svg {
+    opacity: 0.5
+  }
+
+
+  &:hover {
+
+    svg {
+      opacity: 1;
+    }
+
+    transform: translate(0, -2px);
+  }
+
+  &:focus,
+  &:active {
+    outline: 0;
+  }
+}
+
+.round-controls__badge {
+  opacity: 0;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  background: #4A90E2;
+  display: block;
+  left: 0px;
+  transition: opacity 0.2s ease;
+}
+
+.round-controls--should-sort {
+  .round-controls__badge {
+    opacity: 1;
+  }
+}

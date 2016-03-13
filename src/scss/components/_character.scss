@@ -1,20 +1,20 @@
 //config
-$character-background-color : #FCFCFC;
-$character-border-color : #dddddd;
-$character-input-focus-border-color: #CDCDCD;
-$character-shadow-color : #dddddd;
-$character-active-background-color: rgba(0, 188, 212, 1);
-$character-active-background-color-hover: rgba(0, 188, 212, 0.75);
+$background-color: white;
+$control-background-color: #f7f7f7;
+$active-background-color: #4A90E2;
+$active-control-background-color: #293345;
+$hold-background-color: #4A4A4A;
+$hold-control-background-color: #222;
+$text-color: #4A4A4A;
 
 // BASE
 .character {
-  border: 1px solid $character-border-color;
-  padding: 10px;
   display: flex;
-  flex-direction: row;
-  margin-bottom: -1px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-direction: column;
   position: relative;
-  background-color: $character-background-color;
+  background-color: white;
   transition: all 0.2s ease;
 
   &:last-of-type {
@@ -23,72 +23,145 @@ $character-active-background-color-hover: rgba(0, 188, 212, 0.75);
 
   &:hover {
     position: relative;
-    z-index: 98;
-    box-shadow: 0 2px 15px $character-shadow-color;
-    cursor: pointer;
-    background-color:white;
   }
 }
 
 // ELEMENTS
 
-.character__initiative {
-  height: 50px;
-  width: 50px;
-  line-height: 50px;
+// STATUS CARD
+.character__status {
+  padding: 10px;
+}
+
+
+.character__centered-text {
   text-align: center;
-  border-radius: 50%;
-  border: 1px solid $character-border-color;
-  margin-right: 10px;
-
-  &:hover {
-    border-color: #ddd;
-  }
-  &:focus {
-    border: 1px solid $character-input-focus-border-color;
-    background-color: white;
-  }
 }
 
-.character__name {
-  width: 100%;
-  border: 1px solid transparent;
+// Input classes
+.character__input-group {
+  margin: 20px 0;
+}
+
+.character__label {
+  color: $text-color;
+  text-transform: uppercase;
+  font-size: 12px;
+  opacity: 0.5;
   display: block;
-  background-color: transparent;
-  transition: background-color .2s ease, border .2s ease;
-  height: 30px;
-  align-self: center;
-  &:focus {
-    border-bottom: 1px solid $character-input-focus-border-color;
-  }
 }
 
-.character__initiative,
-.character__name,
-.character__remove,
-.character__activate  {
+.character__input {
+  font-size: 24px;
+  border: 0;
+  background-color: transparent;
+  font-weight: bold;
+  appearance: none;
+
+  &::placeholder {
+    color: $text-color;
+    opacity: 0.5
+  }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
   &:focus {
     outline: 0;
   }
 }
 
+// input specifics
+.character__name {
+  font-size: 24px;
+  width: 100%;
+}
 
-.character__remove,
-.character__activate  {
-  transition: opacity .2s ease;
-  opacity: 0;
-  background: transparent;
-  border: none;
-  margin-left: auto;
-  align-self: center;
+.character__input-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
-  .character:hover & {
-    opacity: .5;
-  }
+.character__initiative {
+ width: 60px;
+ text-align: center;
+}
 
-  .character:hover &:hover {
+.character__health-group {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.character__current-health{
+ width: 45px;
+ text-align: right;
+}
+
+.character__slash {
+  text-align: center;
+  width: 15px;
+}
+
+.character__max-health {
+  width: 45px;
+  text-align: left;
+}
+
+
+.character__change-health {
+  width: 75px;
+  text-align: center;
+}
+
+.character__slash,
+.character__max-health {
+  font-weight: normal;
+  font-size: 18px;
+}
+
+
+// CONTROL CARD
+.character__action-bar {
+  transition: all 0.2s ease;
+  background-color: $control-background-color;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  text-align: center;
+  color: $text-color;
+}
+
+.character__action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 0.5;
+  font-size: 12px;
+  text-transform: uppercase;
+  height: 45px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
     opacity: 1;
+    transform: translate(0, -2px);
   }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.character__action-label {
+ padding-top: 5px;
 }
 
 
@@ -96,36 +169,52 @@ $character-active-background-color-hover: rgba(0, 188, 212, 0.75);
 // Modifiers
 
 .character--active {
-  background-color: $character-active-background-color-hover;
+  background-color: $active-background-color;
 
-  //activate and remove buttons
-  .character__activate,
-  &:hover .character__activate {
+  .character__label,
+  .character__slash {
     color: white;
-    opacity: 1;
   }
 
-  &:hover .character__remove, {
-    opacity: .75;
+  .character__input {
+    color: white;
+    &::placeholder {
+      color: white;
+    }
   }
 
+  .character__action-bar {
+    background-color: $active-control-background-color;
+    color: white;
+  }
 
-  //change character name, and placeholder color.
+  .character__action {
+
+  }
+
+  .character__control-label {
+
+  }
+
+}
+
+.character--holding {
+  background-color: $hold-background-color;
+
+  .character__label {
+    color: white;
+  }
+
+  .character__initiative,
   .character__name {
     color: white;
-
     &::placeholder {
       color: white;
-      opacity: 1;
     }
   }
 
-  &:hover {
-    background-color: rgba(0, 188, 212, 0.75);
-
-    &::placeholder {
-      color: white;
-      opacity: 1;
-    }
+  .character__action-bar {
+    background-color: $hold-control-background-color;
+    color: white;
   }
 }

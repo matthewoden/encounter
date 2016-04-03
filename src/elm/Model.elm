@@ -6,10 +6,10 @@ type alias Model =
   , nextId : Int
   , turn : Int
   , turnsPerRound : Int
-  , activeCharacter : Character
   , round : Int
   , remindToSort : Bool
   , tabItem : String
+  , isLastInput : Bool
   }
 
 
@@ -23,6 +23,7 @@ type alias History =
 type alias Character =
   { id : Int
   , active : Bool
+  , selected : Bool
   , holding : Bool
   , notes : String
   , name : String
@@ -38,6 +39,7 @@ initialCharacter : Character
 initialCharacter =
   { id = 0
   , active = True
+  , selected = True
   , holding = False
   , notes = ""
   , name = ""
@@ -53,6 +55,7 @@ emptyCharacter : Character
 emptyCharacter =
   { id = 0
   , active = False
+  , selected = False
   , holding = False
   , notes = ""
   , name = ""
@@ -66,12 +69,12 @@ emptyCharacter =
 
 emptyModel : Model
 emptyModel =
-  { characters = [ initialCharacter ]
+  { characters = []
   , nextId = 1
   , turn = 1
   , turnsPerRound = 1
-  , activeCharacter = initialCharacter
   , round = 1
   , remindToSort = False
   , tabItem = ""
+  , isLastInput = False
   }

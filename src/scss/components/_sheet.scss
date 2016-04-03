@@ -1,0 +1,22 @@
+.sheet-list {
+  width: calc(100% - 400px);
+  display: flex;
+  flex-direction: column;
+}
+
+.sheet {
+  height: 100%;
+  padding: 20px;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-direction: column;
+  position: relative;
+  background-color: white;
+  margin: 10px 10px 10px 0px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+  display: none;
+}
+
+.sheet--selected {
+  display: flex;
+}

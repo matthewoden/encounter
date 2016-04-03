@@ -3,6 +3,7 @@ require('./scss/app.scss');
 import Encounter from './elm/Main';
 import Store from 'indexeddb.io';
 
+
 //IndexDB store. Holds state and model.
 var store = new Store({
   db: 'encounter',
@@ -15,14 +16,11 @@ var store = new Store({
     name: 'model',
     property: 'model',
     unique: false
-  },
-  {
-    name: 'dom',
-    property: 'dom',
-    unique: false
   }
 ]
 });
+const node = document.getElementById('app');
+
 
 //initalize store, fetch the first tiem, then start our app.
 
@@ -35,25 +33,32 @@ store
 
 //start app,
 function startApp(startingState, dataStore) {
-  const node = document.getElementById('app');
   const { model, dom } = startingState;
 
   //get last session;
   // if (dom) { node.innerHtml = dom; }
 
-  const app = Encounter.embed( Encounter.Main, node, { getStorage: null })
+  const app = Encounter.embed( Encounter.Main, node, { getStorage: model })
 
   //save current state
   app
     .ports
     .setStorage
     .subscribe(function(model) {
+      console.log(model)
       dataStore.put(
         { model: model
-        , dom: node.innerHtml
         , id: 0
-        }
-      )
+        })
     });
+
+  // app.ports.getTextareaHeight.subscribe(function(id){
+  //   var textarea = document.getElementById(id);
+  //   setTimeout(function(){
+  //       textarea.style.cssText = 'height:auto; padding:0';
+  //       textarea.style.cssText = 'height:' + el.scrollHeight + 'px';
+  //     },0);
+  // });
+
 
 }

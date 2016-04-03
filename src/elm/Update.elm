@@ -12,22 +12,28 @@ import Model exposing (..)
 
 type Action
   = NoOp
+    -- Character Updates
   | UpdateName Int String
   | UpdateInit Int String
+  | UpdateNotes Int String
   | UpdateCurrentHealth Int Int
   | UpdateMaxHealth Int Int
   | UpdateChangeHealth Int String
+  | SetTabIndex String
+  | HealOrHarmCharacter Int Int
+  | SetSelected Int
+    -- Turn Order Updates
   | HoldAction Int Int
+  | HoldActiveCharacter
   | ResumeAction Int String
+  | SortCharacters
+  | JumpToCharacterTurn Int Int
+  | AdvanceRound
+  | ReverseRound
+    -- Character List Manupilation
   | AddCharacter
   | RemoveCharacter Int Int
   | CopyCharacter Character
-  | ActivateCharacter Int Int
-  | HealOrHarmCharacter Int Int
-  | SetTabIndex String
-  | SortCharacters
-  | AdvanceRound
-  | ReverseRound
 
 
 update : Action -> Model -> ( Model, Effects Action )
@@ -36,6 +42,7 @@ update action model =
     NoOp ->
       ( model, Effects.none )
 
+    -- CHARACTER UPDATES  #CU
     UpdateName id newName ->
       let
         updateCharacter character =
@@ -73,6 +80,26 @@ update action model =
         ( { model
             | characters = newCharacterList
             , remindToSort = True
+          }
+        , Effects.none
+        )
+
+    UpdateNotes id newNotes ->
+      let
+        updateCharacter character =
+          if character.id == id then
+            { character
+              | notes = newNotes
+            }
+          else
+            character
+
+        newCharacterList =
+          model.characters
+            |> List.map updateCharacter
+      in
+        ( { model
+            | characters = newCharacterList
           }
         , Effects.none
         )
@@ -136,6 +163,13 @@ update action model =
           }
         , Effects.none
         )
+
+    SetTabIndex inputName ->
+      ( { model
+          | tabItem = inputName
+        }
+      , Effects.none
+      )
 
     HealOrHarmCharacter id newHealth ->
       let
@@ -214,7 +248,7 @@ update action model =
         , Effects.none
         )
 
-    ActivateCharacter id actsOnTurn ->
+    JumpToCharacterTurn id actsOnTurn ->
       let
         newCharacterList =
           model.characters
@@ -251,37 +285,16 @@ update action model =
         )
 
     HoldAction id actsOnTurn ->
+      ( holdActionUpdate model id actsOnTurn
+      , Effects.none
+      )
+
+    HoldActiveCharacter ->
       let
-        updateCharacter character =
-          if character.id == id then
-            { character
-              | holding = True
-            }
-          else
-            character
-
-        newTurn =
-          if actsOnTurn == model.turn then
-            model.turn + 1
-          else
-            model.turn
-
-        newRound =
-          if model.turn + 1 > model.turnsPerRound then
-            model.round + 1
-          else
-            model.round
-
-        newCharacterList =
-          model.characters
-            |> List.map updateCharacter
-            |> List.map (setActiveTurn newTurn)
+        activeCharacter =
+          findActiveCharacter model.characters
       in
-        ( { model
-            | characters = newCharacterList
-            , turn = newTurn
-            , round = newRound
-          }
+        ( holdActionUpdate model activeCharacter.id activeCharacter.actsOnTurn
         , Effects.none
         )
 
@@ -380,20 +393,42 @@ update action model =
         , Effects.none
         )
 
-    SetTabIndex inputName ->
-      ( { model
-          | tabItem = inputName
-        }
-      , Effects.none
-      )
+    SetSelected id ->
+      let
+        newCharacterList =
+          model.characters
+            |> List.map (setSelected id)
+      in
+        ( { model
+            | characters = newCharacterList
+          }
+        , Effects.none
+        )
 
 
 setActiveTurn : Int -> Character -> Character
 setActiveTurn turn character =
   if character.actsOnTurn == turn then
-    { character | active = True }
+    { character
+      | active = True
+      , holding = False
+    }
   else
-    { character | active = False }
+    { character
+      | active = False
+    }
+
+
+setSelected : Int -> Character -> Character
+setSelected id character =
+  if character.id == id then
+    { character
+      | selected = True
+    }
+  else
+    { character
+      | selected = False
+    }
 
 
 findActiveCharacter : List Character -> Character
@@ -463,6 +498,45 @@ assignTurnOrder turn character =
   { character
     | actsOnTurn = turn + 1
   }
+
+
+
+-- hold action
+
+
+holdActionUpdate : Model -> Int -> Int -> Model
+holdActionUpdate model id actsOnTurn =
+  let
+    updateCharacter character =
+      if character.id == id then
+        { character
+          | holding = True
+        }
+      else
+        character
+
+    newTurn =
+      if actsOnTurn == model.turn then
+        resetAtMax (model.turn + 1) model.turnsPerRound
+      else
+        model.turn
+
+    newRound =
+      if model.turn + 1 > model.turnsPerRound then
+        model.round + 1
+      else
+        model.round
+
+    newCharacterList =
+      model.characters
+        |> List.map updateCharacter
+        |> List.map (setActiveTurn newTurn)
+  in
+    { model
+      | characters = newCharacterList
+      , turn = newTurn
+      , round = newRound
+    }
 
 
 

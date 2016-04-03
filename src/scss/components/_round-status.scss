@@ -1,17 +1,23 @@
 //config
 
-$text-color: #4A4A4A;
+$text-color: $dark-gray;
 
 .round-status {
   display: flex;
   flex-direction: row;
+  height: 65px;
+  padding: 10px;
+  padding-left: 30px;
+  border-left: 1px solid #dedede;
+
 }
 
 .round-status__item {
- margin-left: 20px;
+ margin-right: 20px;
  display: flex;
  flex-direction: column;
  text-align: center;
+ justify-content: space-between;
 }
 
 .round-status__label {

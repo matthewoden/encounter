@@ -1,0 +1,35 @@
+// Input classes
+.notes {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.notes__label {
+  color: $dark-gray;
+  text-transform: uppercase;
+  font-size: 12px;
+  opacity: 0.5;
+  display: block;
+}
+
+.notes__textarea {
+  padding-top: 0px;
+  margin-top: 10px;
+  flex-grow: 1;
+  width: 100%;
+  height: auto;
+  flex-grow: 1;
+  background-color: transparent;
+  border: 0;
+  resize:none;
+  overflow: hidden;
+
+  &:hover,
+  &:focus {
+    outline: 0;
+    overflow-y: scroll
+  }
+}

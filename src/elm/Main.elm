@@ -3,34 +3,18 @@ module Main (..) where
 import StartApp
 import Signal exposing (Signal, Address)
 import Html exposing (..)
-import Html.Attributes exposing (..)
 import Effects exposing (Effects, Never)
 import Task exposing (Task)
 
 
+-- import ScratchPad.Input exposing (..)
+-- import Debug
 -- My modules
 
-import CharacterList
-import MenuBar
 import Update exposing (..)
 import Model exposing (..)
-
-
--- UPDATE
--- VIEW
-
-
-view : Address Action -> Model -> Html
-view address model =
-  div
-    [ class "container" ]
-    [ MenuBar.view address model
-    , CharacterList.view address model
-    ]
-
-
-
--- this type annoation is dumb
+import View exposing (view)
+import KeyboardShortcuts exposing (..)
 
 
 app : StartApp.App Model
@@ -39,7 +23,7 @@ app =
     { init = ( initialModel, Effects.none )
     , view = view
     , update = update
-    , inputs = []
+    , inputs = [ directionalShortcuts, statusShortcuts ]
     }
 
 
@@ -76,3 +60,19 @@ port getStorage : Maybe Model
 port setStorage : Signal Model
 port setStorage =
   app.model
+
+
+
+-- port getTextareaHeight : Signal String
+-- port getTextareaHeight =
+--   let
+--     toSelector action =
+--       case action of
+--         Resize selector _ ->
+--           selector
+--
+--         _ ->
+--           ""
+--   in
+--     textareaMailbox.signal
+--       |> Signal.map toSelector

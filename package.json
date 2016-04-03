@@ -20,6 +20,7 @@
     "elm": "^0.16.0",
     "elm-webpack-loader": "^2.0.0",
     "extract-text-webpack-plugin": "^1.0.1",
+    "firebase": "^2.4.1",
     "html-webpack-plugin": "^2.9.0",
     "node-sass": "^3.4.2",
     "postcss-loader": "^0.8.1",

@@ -1,12 +1,18 @@
 //global
 @import "container";
 @import "icon";
+@import "scrollbar";
 
 //sidebar
 @import "sidebar";
-@import "character";
+@import "card";
 
 //top header
 @import "menubar";
 @import "round-controls";
 @import "round-status";
+
+//character-sheet
+@import "sheet";
+@import "notes";
+@import "summary";

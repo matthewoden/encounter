@@ -6,39 +6,29 @@
   justify-content:space-between;
   align-items: center;
   padding: 0 10px;
-  background-color: #222;
+  background-color: white;
   height: 100%;
 }
 
 .round-controls__button {
   border: 0;
-  background-color: transparent;
+  cursor: pointer;
   padding: 0 10px;
-  align-items: center;
   height: 45px;
+  width: 45px;
   color: white;
   display: flex;
-  width: 45px;
   position: relative;
-  flex-direction: row;
-  justify-content:center;
-  transition: all 0.2s ease;
-  cursor: pointer;
-
-  // I hate this. TODO: FIX THIS SHIT.
-  // Make the icons part of the component, or something.
-  // They won't be used elsewhere.
-  svg {
-    opacity: 0.5
-  }
-
+  flex-direction: column;
+  justify-content:space-between;
+  align-items: center;
+  transition: transform, 0.25s ease;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: $dark-gray;
+  background-color: transparent;
 
   &:hover {
-
-    svg {
-      opacity: 1;
-    }
-
     transform: translate(0, -2px);
   }
 
@@ -48,13 +38,34 @@
   }
 }
 
+.round-controls__icon {
+  width: 24px;
+  height: 24px;
+  opacity: 0.5;
+  path {
+    fill: #727272;
+  }
+}
+
+
+.round-controls__label {
+  opacity: 0.5
+}
+
+.round-controls__button:hover {
+  .round-contols__label,
+  .round-controls__icon {
+    opacity: 1;
+  }
+}
+
 .round-controls__badge {
   opacity: 0;
   border-radius: 50%;
   width: 10px;
   height: 10px;
   position: absolute;
-  background: #4A90E2;
+  background: $blue;
   display: block;
   left: 0px;
   transition: opacity 0.2s ease;

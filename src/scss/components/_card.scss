@@ -1,57 +1,57 @@
 //config
 $background-color: white;
-$control-background-color: #f7f7f7;
-$active-background-color: #4A90E2;
-$active-control-background-color: #293345;
-$hold-background-color: #4A4A4A;
-$hold-control-background-color: #222;
-$text-color: #4A4A4A;
+$control-background-color: $very-light-gray;
+$active-background-color: $blue;
+$active-control-background-color: $dark-blue;
+$hold-background-color: $dark-gray;
+$hold-control-background-color: $black;
 
 // BASE
-.character {
+.card {
   display: flex;
   flex-grow: 0;
   flex-shrink: 0;
   flex-direction: column;
   position: relative;
   background-color: white;
-  transition: all 0.2s ease;
+  cursor: pointer;
+  border-radius: 2px;
+  margin: 10px 10px 10px 0;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s ease-in-out;
 
-  &:last-of-type {
-    margin-bottom: 0;
-  }
 
   &:hover {
-    position: relative;
+    transform: translate(0, -2px);
   }
 }
 
 // ELEMENTS
 
 // STATUS CARD
-.character__status {
+.card__status {
   padding: 10px;
 }
 
 
-.character__centered-text {
+.card__centered-text {
   text-align: center;
 }
 
 // Input classes
-.character__input-group {
-  margin: 20px 0;
+.card__input-group {
+  margin: 10px 0;
 }
 
-.character__label {
-  color: $text-color;
+.card__label {
+  color: $dark-gray;
   text-transform: uppercase;
   font-size: 12px;
   opacity: 0.5;
   display: block;
 }
 
-.character__input {
+.card__input {
   font-size: 24px;
   border: 0;
   background-color: transparent;
@@ -59,7 +59,7 @@ $text-color: #4A4A4A;
   appearance: none;
 
   &::placeholder {
-    color: $text-color;
+    color: $dark-gray;
     opacity: 0.5
   }
 
@@ -75,70 +75,74 @@ $text-color: #4A4A4A;
 }
 
 // input specifics
-.character__name {
+.card__name {
   font-size: 24px;
   width: 100%;
 }
 
-.character__input-row {
+.card__input-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.character__initiative {
+.card__initiative {
  width: 60px;
  text-align: center;
 }
 
-.character__health-group {
+.card__health-group {
   display: flex;
   flex-direction: row;
   align-items: baseline;
   justify-content: center;
 }
 
-.character__current-health{
+.card__current-health{
  width: 45px;
  text-align: right;
 }
 
-.character__slash {
+.card__slash {
   text-align: center;
   width: 15px;
 }
 
-.character__max-health {
+.card__max-health {
   width: 45px;
   text-align: left;
 }
 
 
-.character__change-health {
+.card__change-health {
   width: 75px;
   text-align: center;
 }
 
-.character__slash,
-.character__max-health {
+.card__slash,
+.card__max-health {
   font-weight: normal;
   font-size: 18px;
 }
 
 
 // CONTROL CARD
-.character__action-bar {
-  transition: all 0.2s ease;
+.card__action-bar {
   background-color: $control-background-color;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 10px;
   text-align: center;
-  color: $text-color;
+  color: $dark-gray;
+
+  .card:hover & {
+    background-color: darken($control-background-color, 5%);
+  }
+
 }
 
-.character__action {
+.card__action {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -148,7 +152,7 @@ $text-color: #4A4A4A;
   text-transform: uppercase;
   height: 45px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease;
 
   &:hover {
     opacity: 1;
@@ -160,7 +164,7 @@ $text-color: #4A4A4A;
   }
 }
 
-.character__action-label {
+.card__action-label {
  padding-top: 5px;
 }
 
@@ -168,53 +172,69 @@ $text-color: #4A4A4A;
 
 // Modifiers
 
-.character--active {
+.card--active {
   background-color: $active-background-color;
 
-  .character__label,
-  .character__slash {
+  .card__label,
+  .card__slash {
     color: white;
   }
 
-  .character__input {
+  .card__input {
     color: white;
     &::placeholder {
       color: white;
     }
   }
 
-  .character__action-bar {
+  .card__action-bar {
     background-color: $active-control-background-color;
     color: white;
   }
 
-  .character__action {
+  .card__action {
 
   }
 
-  .character__control-label {
+  .card__control-label {
 
+  }
+
+  &:hover {
+    background-color: darken($active-background-color, 5%);
+    .card__action-bar {
+      background-color: darken($active-control-background-color, 5%);
+    }
   }
 
 }
 
-.character--holding {
+.card--holding {
   background-color: $hold-background-color;
 
-  .character__label {
+  .card__label {
     color: white;
   }
 
-  .character__initiative,
-  .character__name {
+  .card__initiative,
+  .card__name {
     color: white;
+
     &::placeholder {
       color: white;
     }
   }
 
-  .character__action-bar {
+  .card__action-bar {
     background-color: $hold-control-background-color;
     color: white;
   }
+
+  &:hover .card__action-bar {
+    background-color: darken($hold-control-background-color, 5%);
+  }
+}
+
+.card--selected {
+
 }
